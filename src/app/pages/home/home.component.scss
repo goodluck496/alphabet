@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh;
+  width: 100vw;
+}
+
+button {
+  font-size: 30px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+}

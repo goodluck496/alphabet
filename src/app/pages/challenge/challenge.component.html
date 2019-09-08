@@ -1,0 +1,60 @@
+<div class="challenge-wrapper">
+  <div class="challenge-item challenge-letter-section">
+
+    <div class="letter-section">
+      <ng-container *ngIf="!!(selectedLetter$ | async); else emptyLetterRef">
+        <div class="letter letter-initial">{{ (selectedLetter$ | async).char | initialLetter}}</div>
+        <div class="letter letter-image-wrapper">
+          <div class="letter-image"
+               [style.background-image]="'url(' + (selectedLetter$ | async).word.image  + ')' | safeContent: 'style'"></div>
+          <div class="letter-image-title">
+            {{(selectedLetter$ | async).word.name}}
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <ng-template #emptyLetterRef>
+      <div class="letter letter-initial">#</div>
+      <div class="letter letter-image"></div>
+    </ng-template>
+  </div>
+  <div class="challenge-item challenge-word-section">
+    <div class="word-section">
+      <div class="word-section-title">
+        Найдите (кликните) букву
+        <span class="word-section-char">{{(selectedLetter$ | async).char}}</span> в слове:
+      </div>
+      <div class="word-section-word">
+        <div
+          *ngFor="let letter of getWord() | async"
+          (click)="checkLetterInWord(letter)"
+          class="letter-in-word"
+          [class.letter-in-word--checked]="(getLetterChecked(letter) | async) && (checkLetter$ | async) === 1"
+        >{{letter}}</div>
+        <div *ngIf="(checkLetter$ | async) > 0"
+             class="check-letter-section"
+             [ngClass]="{
+          'check-letter-section--valid': (checkLetter$ | async) === 1,
+          'check-letter-section--invalid': (checkLetter$ | async) === 2
+         }"
+        >
+          <ng-container *ngIf="(checkLetter$ | async) === 1; else notCheckedRef;">Правильно</ng-container>
+          <ng-template #notCheckedRef>Не правильно</ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="challenge-item challenge-letter-list-section">
+    <div class="letter letter-list">
+      <ng-container *ngFor="let letter of letters$ | async">
+        <div
+          class="letter letter-item"
+          [class.letter-item--selected]="letter.selected"
+          [class.letter-item--vowel]="letter.vowel"
+          (click)="selectLetter(letter)"
+        >{{letter.char | initialLetter}}
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
