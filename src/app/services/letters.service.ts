@@ -55,6 +55,7 @@ const wordsInFirstLetter: Word[] = [
   {name: 'дирижабль', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/USS_Macon_F9C.jpg/220px-USS_Macon_F9C.jpg'},
   {name: 'ель', image: 'https://avatars.mds.yandex.net/get-mpic/96484/img_id5933253325839792409/9hq'},
   {name: 'ёж', image: 'http://mirplaneta.ru/images/4/630.jpg'},
+  {name: 'жаба', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Bufotes_oblongus.jpg/275px-Bufotes_oblongus.jpg'},
   {name: 'зеленый', image: 'https://libdiz.com/wp-content/uploads/2016/01/G.jpg'},
   {name: 'институт', image: 'http://www.iacp.dvo.ru/resources/fileman/Uploads/IMG_7038.JPG'},
   {name: 'йод', image: 'https://dialog.ru/upload/iblock/384/384f800f66dfb0c3883ea67060792a54.png'},
