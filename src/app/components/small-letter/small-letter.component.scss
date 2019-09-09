@@ -1,0 +1,51 @@
+:host {
+  display: flex;
+  align-items: center;
+}
+
+.letter {
+  display: flex;
+  height: 100%;
+
+  &-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    font-size: 17px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 400ms;
+    color: cornflowerblue;
+    position: relative;
+
+    &:hover {
+      background-color: rgba(50,50,50,.1);
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    &--selected {
+      text-decoration: underline;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    &--has-image {
+      &:before {
+        top: 28px;
+        right: -2px;
+        font-size: 10px;
+        position: absolute;
+        content: "🚀";
+        opacity: .3;
+      }
+    }
+
+    &--vowel {
+      color: indianred;
+    }
+  }
+
+}

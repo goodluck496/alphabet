@@ -1,0 +1,22 @@
+<div class="title">
+  Найдите (кликните) букву
+  <span class="char">{{selectedLetter.char}}</span> в слове:
+</div>
+<div class="word">
+  <div
+    *ngFor="let letter of word"
+    (click)="checkLetterInWord(letter)"
+    class="letter-in-word"
+    [class.letter-in-word--checked]="letterChecked(letter)"
+  >{{letter}}</div>
+  <div *ngIf="checkLetter > 0"
+       class="check-letter-section"
+       [ngClass]="{
+          'check-letter-section--valid': checkValid,
+          'check-letter-section--invalid': checkInvalid
+         }"
+  >
+    <ng-container *ngIf="checkValid; else notCheckedRef;">Правильно</ng-container>
+    <ng-template #notCheckedRef>Не правильно</ng-template>
+  </div>
+</div>

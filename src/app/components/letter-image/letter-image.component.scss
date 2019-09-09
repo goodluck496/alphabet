@@ -1,0 +1,24 @@
+.letter {
+
+  &-image-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+
+  &-image-title {
+    height: 15%;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  &-image {
+    height: 85%;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+}

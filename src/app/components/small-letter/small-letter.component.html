@@ -1,0 +1,8 @@
+<div
+  class="letter letter-item"
+  [class.letter-item--selected]="letter.selected"
+  [class.letter-item--vowel]="letter.vowel"
+  [class.letter-item--has-image]="letter.word.hasImage"
+  (click)="onClick()"
+>{{letter.char | initialLetter}}
+</div>

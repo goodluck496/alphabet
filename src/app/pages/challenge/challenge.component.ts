@@ -48,30 +48,7 @@ export class ChallengeComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkLetterInWord(letter: string): void {
-    this.selectedLetter$
-      .pipe(take(1))
-      .subscribe((l => this.checkLetter$.next(l.char === letter ? 1 : 2)));
 
-    if(this._checkTimer) {
-      this._checkTimer.unsubscribe();
-      this._checkTimer = undefined;
-    }
-
-    this._checkTimer = timer(3000)
-      .pipe(take(1))
-      .subscribe(() => this.checkLetter$.next(0));
-  }
-
-  getWord(): Observable<string[]> {
-    return this.selectedLetter$
-      .pipe(map(l => l.words[0].split('')));
-  }
-
-  getLetterChecked(letter: string): Observable<boolean> {
-    return this.selectedLetter$
-      .pipe(map(l => l.char === letter))
-  }
 
   ngOnInit() {
     combineLatest(this.route.paramMap, this.letters$)
