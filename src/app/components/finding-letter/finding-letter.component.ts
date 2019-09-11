@@ -34,10 +34,7 @@ export class FindingLetterComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!!changes.letter && changes.letter.currentValue) {
-      this.selectedLetter = changes.selectedLetter.currentValue;
-    }
-
+    this.checkLetter = 0;
   }
 
   checkLetterInWord(letter: string): void {

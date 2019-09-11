@@ -16,10 +16,6 @@ export class LetterImageComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!!changes.letter && changes.letter.currentValue) {
-      this.letter = changes.letter.currentValue;
-    }
-
   }
 
   get image(): string {
