@@ -1,7 +1,9 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Subscription, timer }                                from 'rxjs';
+import { BehaviorSubject, Subscription, timer }               from 'rxjs';
 import { take }                                               from 'rxjs/operators';
-import { Letter }                                             from '../../services/letters.service';
+import { Letter }                                             from '../../models/letter.model';
+import { CHECK_LETTER }                                       from '../../services/helpers';
+
 
 @Component({
   selector: 'app-finding-letter',
@@ -9,36 +11,41 @@ import { Letter }                                             from '../../servic
   styleUrls: ['./finding-letter.component.scss']
 })
 export class FindingLetterComponent implements OnInit, OnChanges {
-  checkLetter: 0 | 1 | 2 = 0;
+  checkLetter: CHECK_LETTER = CHECK_LETTER.DEFAULT;
 
   @Input() selectedLetter: Letter;
 
+  word$: BehaviorSubject<string[]> = new BehaviorSubject([]);
   private _checkTimer: Subscription;
 
   constructor() {
   }
 
-  get word(): string[] {
-    return this.selectedLetter.words[0].split('');
-  }
-
   get checkValid(): boolean {
-    return this.checkLetter === 1;
+    return this.checkLetter === CHECK_LETTER.CHECKED;
   }
 
   get checkInvalid(): boolean {
-    return this.checkLetter === 2;
+    return this.checkLetter === CHECK_LETTER.NOT_CHECKED;
   }
 
   ngOnInit() {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.checkLetter = 0;
+    this.checkLetter = CHECK_LETTER.DEFAULT;
+
+    if (!!this.selectedLetter.words.length) {
+      this.word$.next(this.selectedLetter.words[0].split(''));
+    }
+  }
+
+  resetCheck(): void {
+    this.checkLetter = CHECK_LETTER.DEFAULT;
   }
 
   checkLetterInWord(letter: string): void {
-    this.checkLetter = letter === this.selectedLetter.char ? 1 : 2;
+    this.checkLetter = letter === this.selectedLetter.char ? CHECK_LETTER.CHECKED : CHECK_LETTER.NOT_CHECKED;
 
     if (this._checkTimer) {
       this._checkTimer.unsubscribe();
@@ -47,7 +54,7 @@ export class FindingLetterComponent implements OnInit, OnChanges {
 
     this._checkTimer = timer(3000)
       .pipe(take(1))
-      .subscribe(() => this.checkLetter = 0);
+      .subscribe(() => this.resetCheck());
   }
 
   getLetterChecked(letter: string): boolean {
@@ -55,7 +62,7 @@ export class FindingLetterComponent implements OnInit, OnChanges {
   }
 
   letterChecked(letter: string): boolean {
-    return this.getLetterChecked(letter) && this.checkLetter === 1;
+    return this.getLetterChecked(letter) && this.checkLetter === CHECK_LETTER.CHECKED;
   }
 
 

@@ -4,7 +4,7 @@
 </div>
 <div class="word">
   <div
-    *ngFor="let letter of word"
+    *ngFor="let letter of word$ | async"
     (click)="checkLetterInWord(letter)"
     class="letter-in-word"
     [class.letter-in-word--checked]="letterChecked(letter)"

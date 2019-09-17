@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Letter }                                                                   from '../../services/letters.service';
+import { Letter }                                                                   from '../../models/letter.model';
 
 @Component({
   selector: 'app-small-letter',

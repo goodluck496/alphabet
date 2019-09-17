@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Letter }                                             from '../../services/letters.service';
+import { Letter }                                             from '../../models/letter.model';
 
 @Component({
   selector: 'app-letter-image',

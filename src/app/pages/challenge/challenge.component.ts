@@ -1,8 +1,10 @@
-import { Component, OnDestroy, OnInit }                                             from '@angular/core';
-import { ActivatedRoute, Router }                                                   from '@angular/router';
-import { BehaviorSubject, combineLatest, Observable, Subject, Subscription, timer } from 'rxjs';
-import { map, take, tap }                                                           from 'rxjs/operators';
-import { Letter, LettersService }                                                   from '../../services/letters.service';
+import { Component, OnDestroy, OnInit }                                      from '@angular/core';
+import { ActivatedRoute, Router }                                            from '@angular/router';
+import { BehaviorSubject, combineLatest, Observable, Subject, Subscription } from 'rxjs';
+import { map, take }                                                         from 'rxjs/operators';
+import { Letter }                                                            from '../../models/letter.model';
+import { CHECK_LETTER }                                                      from '../../services/helpers';
+import { LettersService }                                                    from '../../services/letters.service';
 
 
 @Component({
@@ -12,8 +14,8 @@ import { Letter, LettersService }                                               
 })
 export class ChallengeComponent implements OnInit, OnDestroy {
 
-  selectedLetter$: BehaviorSubject<Letter> = new BehaviorSubject<Letter>(null);
-  checkLetter$: BehaviorSubject<0 | 1 | 2> = new BehaviorSubject<0 | 1 | 2>(0);
+  selectedLetter$: BehaviorSubject<Letter> = new BehaviorSubject<Letter>(new Letter());
+  checkLetter$: BehaviorSubject<CHECK_LETTER> = new BehaviorSubject<CHECK_LETTER>(CHECK_LETTER.DEFAULT);
 
   private _checkTimer: Subscription;
   private _onDestroy: Subject<void> = new Subject();
@@ -42,7 +44,7 @@ export class ChallengeComponent implements OnInit, OnDestroy {
       this.router.navigate(['challenge', letter.char]);
       this.lettersService.selectLetter(letter);
       this.selectedLetter$.next(letter);
-      this.checkLetter$.next(0);
+      this.checkLetter$.next(CHECK_LETTER.DEFAULT);
     } catch (e) {
       console.error(e);
     }

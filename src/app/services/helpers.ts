@@ -1,0 +1,5 @@
+export enum CHECK_LETTER {
+  DEFAULT,
+  CHECKED,
+  NOT_CHECKED,
+}

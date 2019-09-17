@@ -1,51 +1,7 @@
 import { Injectable }                  from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-
-export class Word {
-  name: string = '';
-  image: string = 'http://www.proathlete.nl/wp-content/uploads/2014/11/no_image_placeholder.png';
-  hasImage?: boolean = false;
-
-  constructor(props?: Word | any) {
-    if (!props) {
-      return;
-    }
-    Object.keys(props)
-      .forEach((k: keyof Word | string) => {
-        if (k === 'image' && !!props[k]) {
-          this.hasImage = true;
-        }
-        if (!props[k]) {
-          return;
-        } else {
-          this[k] = props[k];
-        }
-      });
-  }
-}
-
-export class Letter {
-  char: string = '';
-  word: Word = new Word();
-  selected: boolean = false;
-  vowel: boolean = false;
-  words: string[] = [];
-
-  constructor(props?: Letter | any) {
-    if (!props) {
-      return;
-    }
-    Object.keys(props)
-      .filter(k => !!props[k])
-      .forEach(k => this[k] = props[k]);
-
-  }
-}
-
-export interface Word {
-  name: string;
-  image: string;
-}
+import { Letter }                      from '../models/letter.model';
+import { Word }                        from '../models/word.model';
 
 const wordsInFirstLetter: Word[] = [
   {name: 'арбуз', image: 'https://kipmu.ru/wp-content/uploads/watermelon.jpg'},
